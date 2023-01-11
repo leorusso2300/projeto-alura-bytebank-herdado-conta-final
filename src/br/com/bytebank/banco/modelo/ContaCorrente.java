@@ -1,5 +1,7 @@
 package br.com.bytebank.banco.modelo;
 
+import br.com.bytebank.banco.exceptions.MinhaExcecao;
+
 public class ContaCorrente extends Conta implements Tributavel {
 
 	public ContaCorrente(int numero, int agencia) {
@@ -7,9 +9,9 @@ public class ContaCorrente extends Conta implements Tributavel {
 	}
 
 	@Override
-	public boolean saca(double valor) {
+	public void saca(double valor) {
 		double valorAsacar = valor + 0.2;
-		return super.saca(valorAsacar);
+		super.saca(valorAsacar);
 	}
 
 	@Override
@@ -17,8 +19,9 @@ public class ContaCorrente extends Conta implements Tributavel {
 		if (valor > 0) {
 			super.saldo += valor;
 			return true;
+		} else {
+			throw new MinhaExcecao("Erro ao fazer o depósito, verique os valores inseridos!!");
 		}
-		return false;
 	}
 
 	@Override

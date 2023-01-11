@@ -1,5 +1,10 @@
 package br.com.bytebank.banco.modelo;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import br.com.bytebank.banco.exceptions.MinhaExcecao;
+
 public abstract class Conta {
 
 	protected double saldo;
@@ -8,31 +13,29 @@ public abstract class Conta {
 	public Cliente titular;
 	private static int total;
 
+	Locale localeBR = new Locale("pt", "BR");
+	NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
+
 	public Conta(int numero, int agencia) {
 		total++;
 		this.numero = numero;
 		this.agencia = agencia;
-		System.out.println("Total de contas criadas: " + total);
+		//System.out.println("Total de contas criadas: " + total);
 	}
 
 	public abstract boolean deposita(double valor);
 
-	public boolean saca(double valor) {
-		if (this.saldo >= valor && valor > 0) {
-			this.saldo -= valor;
-			return true;
+	public void saca(double valor) {
+		if (this.saldo < valor) {
+			throw new MinhaExcecao(
+					"Erro ao sacar: " + dinheiro.format(this.saldo) + " | Valor: " + dinheiro.format(valor));
 		}
-		return false;
+		this.saldo -= valor;
 	}
 
-	public boolean transfere(double valor, Conta destino) {
-		if (this.saldo >= valor && valor > 0) {
-			saca(valor);
-			destino.deposita(valor);
-			return true;
-		}
-		return false;
-
+	public void transfere(double valor, Conta destino) {
+		saca(valor);
+		destino.deposita(valor);
 	}
 
 	public double getSaldo() {

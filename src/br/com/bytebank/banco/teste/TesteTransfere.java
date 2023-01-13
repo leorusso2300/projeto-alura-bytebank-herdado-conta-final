@@ -6,7 +6,11 @@ import java.util.Locale;
 import br.com.bytebank.banco.exceptions.MinhaExcecao;
 import br.com.bytebank.banco.modelo.ContaCorrente;
 import br.com.bytebank.banco.modelo.ContaPoupanca;
-
+/**
+ * Classe que representa os testes da transferenia
+ * @author Leonardo Russo
+ *
+ */
 public class TesteTransfere {
 
 	public static void main(String[] args) {

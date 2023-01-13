@@ -15,13 +15,11 @@ public class ContaCorrente extends Conta implements Tributavel {
 	}
 
 	@Override
-	public boolean deposita(double valor) {
-		if (valor > 0) {
-			super.saldo += valor;
-			return true;
-		} else {
+	public void deposita(double valor) {
+		if (valor <= 0) {
 			throw new MinhaExcecao("Erro ao fazer o depósito, verique os valores inseridos!!");
 		}
+		super.saldo += valor;
 	}
 
 	@Override

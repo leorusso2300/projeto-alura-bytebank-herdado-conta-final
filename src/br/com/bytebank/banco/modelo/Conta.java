@@ -2,8 +2,13 @@ package br.com.bytebank.banco.modelo;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-
 import br.com.bytebank.banco.exceptions.MinhaExcecao;
+
+/**
+ * Classe representa a moldura de uma conta
+ * 
+ * @author Leonardo Russo
+ */
 
 public abstract class Conta {
 
@@ -11,21 +16,35 @@ public abstract class Conta {
 	private int agencia;
 	private int numero;
 	public Cliente titular;
-	private static int total;
+	private static int total = 0;
 
 	Locale localeBR = new Locale("pt", "BR");
 	NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 
+	/**
+	 * Construtor para inicializar o objeto conta a partir da agencia e número.
+	 * 
+	 * @param numero
+	 * @param agencia
+	 * 
+	 */
 	public Conta(int numero, int agencia) {
 		total++;
 		this.numero = numero;
 		this.agencia = agencia;
-		//System.out.println("Total de contas criadas: " + total);
+		// System.out.println("Total de contas criadas: " + total);
 	}
 
-	public abstract boolean deposita(double valor);
+	public abstract void deposita(double valor);
 
-	public void saca(double valor) {
+	/**
+	 * Valor precisa ser maior do que o saldo
+	 * 
+	 * @param valor
+	 * @throws MinhaExcecao
+	 * 
+	 */
+	public void saca(double valor) throws MinhaExcecao {
 		if (this.saldo < valor) {
 			throw new MinhaExcecao(
 					"Erro ao sacar: " + dinheiro.format(this.saldo) + " | Valor: " + dinheiro.format(valor));

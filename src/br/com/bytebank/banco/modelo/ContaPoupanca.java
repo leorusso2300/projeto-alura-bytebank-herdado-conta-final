@@ -1,5 +1,7 @@
 package br.com.bytebank.banco.modelo;
 
+import br.com.bytebank.banco.exceptions.MinhaExcecao;
+
 public class ContaPoupanca extends Conta {
 
 	public ContaPoupanca(int numero, int agencia) {
@@ -7,12 +9,11 @@ public class ContaPoupanca extends Conta {
 	}
 
 	@Override
-	public boolean deposita(double valor) {
-		if (valor > 0) {
-			super.saldo += valor;
-			return true;
+	public void deposita(double valor) {
+		if (valor <= 0) {
+			throw new MinhaExcecao("Erro ao fazer o depósito, verique os valores inseridos!!");
 		}
-		return false;
+		super.saldo += valor;
 	}
 
 }

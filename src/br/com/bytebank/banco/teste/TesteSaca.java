@@ -5,7 +5,11 @@ import java.util.Locale;
 
 import br.com.bytebank.banco.exceptions.MinhaExcecao;
 import br.com.bytebank.banco.modelo.ContaCorrente;
-
+/**
+ * Classe que representa os testes do saque
+ * @author Leonardo Russo
+ *
+ */
 public class TesteSaca {
 
 	public static void main(String[] args) {

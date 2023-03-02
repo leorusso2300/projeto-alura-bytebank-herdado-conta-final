@@ -27,4 +27,9 @@ public class ContaCorrente extends Conta implements Tributavel {
 		return super.saldo * 0.02;
 	}
 
+	@Override
+	public String toString() {
+		return "Conta corrente | " + super.toString();
+	}
+
 }
